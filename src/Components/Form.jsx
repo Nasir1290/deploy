@@ -1,0 +1,117 @@
+import React, { useEffect, useState } from "react";
+
+const Form = () => {
+  const data = {
+    name: "",
+    email: "",
+    password: "",
+  };
+  const [inputData, setInputData] = useState(data);
+  const handleChange = (e) => {
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
+  };
+
+  const [flag,setFlag] = useState(false)
+  useEffect( () => { 
+    console.log("registered")
+   } , [flag] )
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(! inputData.name || ! inputData.email || ! inputData.password) {
+      alert("Please provide all info!!!!!!!!!!!")
+    }
+
+    else{
+      setFlag(true)
+    }
+
+    console.log(inputData);
+  };
+
+  return (
+    <div className=" flex justify-center  items-center">
+      <pre>
+        {flag?<h2 className=" bg-green-600 font-bold rounded-lg text-white absolute top-16 px-[144px] py-[11px]">Hello {inputData.name} your info has been submitted successfully !!!!!!!!!</h2>:''}
+      </pre>
+      <form
+        onSubmit={handleSubmit}
+        className="flex justify-center sm:w-[80%] items-center flex-col p-20  bg-[#303487] border border-solid rounded-md border-gray-700"
+      >
+        <div className="sm:w-full md:w-1/2 border-4 border-solid border-purple-400 p-6 rounded-lg bg-gray-200">
+          <div>
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Enter Your Name
+            </label>
+            <input
+              type="text"
+              onChange={handleChange}
+              name="name"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Enter your Name"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Your email
+            </label>
+            <input
+              onChange={handleChange}
+              type="text"
+              name="email"
+              id="email"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="name@flowbite.com"
+              required
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Your password
+            </label>
+            <input
+              onChange={handleChange}
+              name="password"
+              type="password"
+              id="password"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
+            />
+          </div>
+          <div className="flex items-start mb-6">
+            <div className="flex items-center h-5">
+              <input
+                id="remember"
+                type="checkbox"
+                value=""
+                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                required
+              />
+            </div>
+            <label
+              htmlFor="remember"
+              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Remember me
+            </label>
+          </div>
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default Form;
